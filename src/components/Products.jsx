@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addItem } from '../redux/action';
 import Skeleton from 'react-loading-skeleton';
 import "react-loading-skeleton/dist/skeleton.css";
-import Modal from '../components/Modal';
+import Modal from './Modal';
 
 export default function Products() {
     const [data, setData] = useState([]);

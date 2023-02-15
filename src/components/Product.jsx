@@ -15,6 +15,8 @@ export default function Product() {
         dispatch(addItem(product));
     }
 
+    
+
     useEffect(() => {
         const getProduct = async () => {
             setLoading(true);
