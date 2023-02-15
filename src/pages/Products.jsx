@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { addItem } from '../redux/action';
 import Skeleton from 'react-loading-skeleton';
-import { NavLink } from 'react-router-dom';
 import "react-loading-skeleton/dist/skeleton.css";
+import Modal from '../components/Modal';
 
 export default function Products() {
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState(data);
     const [loading, setLoading] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
     let componentMounted = true;
+
+    const dispatch = useDispatch();
+    const addProduct = (product) => {
+        dispatch(addItem(product));
+    }
 
     useEffect(() => {
         const getProducts = async () => {
@@ -73,11 +81,23 @@ export default function Products() {
                                         <p class="card-text fw-bold">
                                             ${product.price}
                                         </p>
-                                        <NavLink to={`/products/${product.id}`} class="btn btn-outline-dark">
-                                            Buy now
-                                        </NavLink>
+                                        <button 
+                                            to="/cart" 
+                                            className="btn btn-outline-dark px-4 py-2" 
+                                            onClick={() => {
+                                                addProduct(product); 
+                                                setOpenModal(true)
+                                            }}
+                                        >
+                                            Add to cart
+                                        </button>
                                     </div>
                                 </div>
+                                <Modal 
+                                    open={openModal} 
+                                    onClose={() => setOpenModal(false)}
+                                    width="100px"
+                                />
                             </div>
                         </>
                     )
@@ -100,6 +120,7 @@ export default function Products() {
                     </div>
                 </div>
             </div>
+            
         </div>
     )
 }

@@ -29,11 +29,6 @@ export default function Navbar () {
                                     Home
                                 </NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/products">
-                                    Products
-                                </NavLink>
-                            </li>
                         </ul>
                         <div classNameName="buttons">
                             <NavLink to="/cart" className="btn btn-outline-dark ms-2">

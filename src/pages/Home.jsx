@@ -7,7 +7,7 @@ export default function Home() {
     <>
         <div classNameName="hero">
             <div className="card bg-dark text-white border-0">
-                <img src={Image} className="card-img" alt="..." height="550px"/>
+                <img src={Image} className="card-img" alt="..." height="250px"/>
                 <div className="card-img-overlay d-flex flex-column justify-content-center">
                     <div classNameName="container">
                         <h5 className="card-title display-3 fw-bolder mb-0">New Season Arrivals</h5>
