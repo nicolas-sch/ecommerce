@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { delItem } from '../redux/action/index'
+import { addItem, delItem } from '../redux/action/index'
 
 
 const Cart = () => {
@@ -12,7 +12,16 @@ const Cart = () => {
         dispatch(delItem(item))
     };
 
+    const handleAdd = (item) => {
+      dispatch(addItem(item));
+    };
+    
+    const handleDel = (item) => {
+      dispatch(delItem(item));
+    };
+
     const cartItems = (product) => {
+
         return(
           <>
             <div className="px-4 my-5 bg-light rounded-3" key={product.id}>
@@ -24,7 +33,22 @@ const Cart = () => {
                         </div>
                         <div className="col-md-4">
                             <h3>{product.title}</h3>
-                            <p className="lead fw-bold">${product.price}</p>
+                            <p className="lead fw-bold">
+                              {product.qty} X ${product.price} = $
+                              {(product.qty * product.price).toFixed(2)}
+                            </p>
+                            <button
+                              className="btn btn-outline-dark me-4"
+                              onClick={() => handleDel(product)}
+                            >
+                              <i className="fa fa-minus"></i>
+                            </button>
+                            <button
+                              className="btn btn-outline-dark"
+                              onClick={() => handleAdd(product)}
+                            >
+                              <i className="fa fa-plus"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -45,11 +69,11 @@ const Cart = () => {
         );
     }
 
-    const checkout = () => {
-  
+    const totalPrice = () => {
       var total = 0;
+      
       const itemList = (item) => {
-          total = total + item.price;
+          total = total + item.price * item.qty;
       }
   
       return (
@@ -62,7 +86,7 @@ const Cart = () => {
   
                               <li className="list-group-item d-flex justify-content-between">
                                   <span>Total (USD)</span>
-                                  <strong>${total}</strong>
+                                  <strong>${(total).toFixed(2)}</strong>
                               </li>
                           </ul>
                       </div>
@@ -76,7 +100,7 @@ const Cart = () => {
         <>
             {state.length === 0 && emptyCart()}
             {state.length !== 0 && state.map(cartItems)}
-            {state.length !== 0 && checkout()}
+            {state.length !== 0 && totalPrice()}
         </>
     )
 }
