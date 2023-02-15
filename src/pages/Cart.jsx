@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { delItem } from '../redux/action/index'
-import { NavLink } from 'react-router-dom'
 
 
 const Cart = () => {
@@ -46,16 +45,6 @@ const Cart = () => {
         );
     }
 
-    const button = () => {
-        return(
-            <div className="container">
-                <div className="row">
-                    <NavLink to="/checkout" className="btn btn-outline-primary mb-5 w-25 mx-auto">Proceed To checkout</NavLink>
-                </div>
-            </div>
-        );
-    }
-
     const checkout = () => {
   
       var total = 0;
@@ -88,7 +77,6 @@ const Cart = () => {
             {state.length === 0 && emptyCart()}
             {state.length !== 0 && state.map(cartItems)}
             {state.length !== 0 && checkout()}
-            {state.length !== 0 && button()}
         </>
     )
 }
